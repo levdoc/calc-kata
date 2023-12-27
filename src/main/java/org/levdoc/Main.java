@@ -47,7 +47,7 @@ class Main {
         int result = 0;
         for (RomanNumber romanNumber : romanNumberList) {
             while (value.startsWith(romanNumber.toString())) {
-                result = result + romanNumber.getValue();
+                result += romanNumber.getValue();
                 value = value.substring(romanNumber.toString().length());
             }
         }
