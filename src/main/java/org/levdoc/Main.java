@@ -8,8 +8,9 @@ class Main {
     static List<RomanNumber> romanNumberList = Arrays.asList(RomanNumber.values());
 
     public static void main(String[] args) {
-        System.out.println("Hello world!");
-        System.out.println(arabicToRoman(93));
+        System.out.println(arabicToRoman(3999));
+        System.out.println(romanToArabic("MMMCMXCIX"));
+
     }
 
     public static String calc(String input) {
@@ -34,6 +35,24 @@ class Main {
         }
 
         return result.toString();
+    }
+
+    /**
+     * Метод конвертирует число из римской записи в арабскую
+     * @param value Римское число
+     * @return Арабское число
+     */
+    private static int romanToArabic(String value) {
+
+        int result = 0;
+        for (RomanNumber romanNumber : romanNumberList) {
+            while (value.startsWith(romanNumber.toString())) {
+                result = result + romanNumber.getValue();
+                value = value.substring(romanNumber.toString().length());
+            }
+        }
+
+        return result;
     }
 
 }
