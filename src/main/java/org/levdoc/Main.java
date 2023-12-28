@@ -1,58 +1,52 @@
 package org.levdoc;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.Scanner;
+
+import static org.levdoc.NumberConverter.parseToArabic;
+import static org.levdoc.NumberConverter.parseToRoman;
 
 class Main {
-    static List<RomanNumber> romanNumberList = Arrays.asList(RomanNumber.values());
 
     public static void main(String[] args) {
-        System.out.println(arabicToRoman(3999));
-        System.out.println(romanToArabic("MMMCMXCIX"));
+        String inputLine = "";
+        Scanner scanner = new Scanner(System.in);
+//        inputLine = scanner.nextLine().toUpperCase().trim().replaceAll("\\s+", "");
+        inputLine = scanner.nextLine().toUpperCase().trim().replaceAll("\\s+", "");
+
+        System.out.println(calc(inputLine));
+
 
     }
 
     public static String calc(String input) {
+
+        String[] strMass = input.split("[+*/-]");
+        int i = input.length() - input.replaceAll("[+/*-]", "").length();
+
+        //  Проверка: является ли введенная строка математическим выражением
+        if ((i == 0) || (strMass.length < 2)) {
+            throw new RuntimeException("Введенная строка не является математической операцией.");
+        }
+        // Проверка формата математической операции на правильность (верный вариант: [операнд1] [действие(+-/*)] [операнд2])
+        if (i > 1) {
+            throw new RuntimeException("Формат математической операции не удовлетворяет заданию.");
+        }
+
+        //regex ^[MDCLXVI]+$
+        // или ^(?=[MDCLXVI])M*(C[MD]|D?C*)(X[CL]|L?X*)(I[XV]|V?I*)$
+
+
+
+
+
+
+        System.out.println(strMass[0]);
+
         return null;
     }
 
-    /**
-     * Метод конвертирует число в римской записи в арабскую
-     *
-     * @param value римское число
-     * @return арабское число
-     */
-    private static String arabicToRoman(int value) {
-        Collections.reverse(romanNumberList);
-
-        StringBuilder result = new StringBuilder();
-        for (RomanNumber romanNumber : romanNumberList) {
-            while (value >= romanNumber.getValue()) {
-                result.append(romanNumber);
-                value -= romanNumber.getValue();
-            }
-        }
-
-        return result.toString();
-    }
-
-    /**
-     * Метод конвертирует число из римской записи в арабскую
-     * @param value Римское число
-     * @return Арабское число
-     */
-    private static int romanToArabic(String value) {
-
-        int result = 0;
-        for (RomanNumber romanNumber : romanNumberList) {
-            while (value.startsWith(romanNumber.toString())) {
-                result += romanNumber.getValue();
-                value = value.substring(romanNumber.toString().length());
-            }
-        }
-
-        return result;
+    private static Boolean isValidLineAndOperand (String[] line) {
+        return true;
     }
 
 }

@@ -1,5 +1,9 @@
 package org.levdoc;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 enum RomanNumber {
     I(1),
     IV(4),
@@ -23,5 +27,11 @@ enum RomanNumber {
 
     public int getValue() {
         return value;
+    }
+
+    public static List<RomanNumber> getRomanNumberListToRoman() {
+        List<RomanNumber> result = Arrays.asList(RomanNumber.values());
+        Collections.reverse(result);
+        return result;
     }
 }
